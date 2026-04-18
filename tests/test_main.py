@@ -1,7 +1,5 @@
 from fastapi.testclient import TestClient
 
-# IMPORTANTE: Aquí debes importar la variable 'app' de tu archivo principal.
-# Si tu archivo donde definiste `app = FastAPI()` se llama main.py, esto está perfecto.
 from main import app
 
 # Iniciamos el cliente de pruebas
@@ -13,8 +11,7 @@ def test_get_products():
     y devuelve una lista de productos con la estructura correcta.
     """
     # 1. Ejecutar la petición
-    # Nota: Si tu router en main.py tiene un prefijo como '/api' o '/productos',
-    # asegúrate de poner la ruta completa aquí (ej. client.get("/productos/"))
+
     response = client.get("/")
 
     # 2. Verificar que la petición fue exitosa
