@@ -5,25 +5,20 @@ client = TestClient(app)
 
 
 def test_root_health_check():
-    """
-    Prueba que la API responde en la ruta raíz con su mensaje de estado.
-    """
     response = client.get("/")
     assert response.status_code == 200
     assert response.json() == {"message": "API funcionando correctamente", "status": "online"}
 
 
 def test_get_products():
-    """
-    Prueba que el endpoint de productos devuelve una lista.
-    """
-    # IMPORTANTE: Cambia "/productos" por la ruta real que configuraste en tu main.py
-    # Si usaste prefix="/api/productos", pon "/api/productos" aquí.
-    response = client.get("/productos")
 
-    assert response.status_code == 200
+
+    response = client.get("/api/v1/productos")
+
+    assert response.status_code == 200, f"Error: La API devolvió {response.status_code}"
+
     data = response.json()
-    assert isinstance(data, list)
+    assert isinstance(data, list), "La respuesta debería ser una lista"
 
     if len(data) > 0:
         primer_producto = data[0]
