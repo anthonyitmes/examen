@@ -6,30 +6,42 @@ on:
   pull_request:
     branches: [ "main" ]
 
-# 2. ¿Qué tareas va a realizar?
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+
+    # NUEVO: Levantamos un servicio de PostgreSQL temporal
+    services:
+      postgres:
+        image: postgres:15  # Usa la versión que tengas en local
+        env:
+          POSTGRES_USER: tu_usuario_aqui
+          POSTGRES_PASSWORD: tu_password_aqui
+          POSTGRES_DB: tu_base_de_datos_aqui
+        ports:
+          - 5432:5432
+        # Esto asegura que la DB esté lista antes de seguir
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
     - name: Descargar el repositorio
       uses: actions/checkout@v4
 
-    # Paso B: Instala Python
-    - name: Configurar Python 3.14
+    - name: Configurar Python 3.10
       uses: actions/setup-python@v5
       with:
-        python-version: "3.14" # Cambia esto si usas otra versión localmente
+        python-version: "3.10"
 
-    # Paso C: FastAPI, Uvicorn, SQLAlchemy y tus herramientas de testing
     - name: Instalar dependencias
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        # Aseguramos que pytest y httpx estén instalados para las pruebas
-        pip install pytest httpx 
+        pip install pytest httpx
 
-    # Paso D: Ejecuta el archivo test_main.py que creaste antes
     - name: Ejecutar pruebas con Pytest
       run: |
         pytest
