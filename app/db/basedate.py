@@ -1,10 +1,14 @@
 # Archivo: app/db/database.py
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
 # URL de conexión postgresql
-SQLALCHEMY_DATABASE_URL = "postgresql://postgres@localhost/User"
-# Conexión a la base de datos llamada postgres
+SQLALCHEMY_DATABASE_URL = os.getenv(
+    "DATABASE_URL",
+    "postgresql://postgres@localhost:5432/User"
+)
+# Conexión a la base de datos llamada User
 #servidor localhost
 #Usuario: postgres
 #contraseña:
