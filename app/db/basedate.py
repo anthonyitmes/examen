@@ -10,6 +10,7 @@ SQLALCHEMY_DATABASE_URL = os.getenv(
 )
 # Conexión a la base de datos llamada User
 #servidor localhost
+#puerto: 5432
 #Usuario: postgres
 #contraseña:
 
