@@ -4,6 +4,10 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 
 # URL de conexión postgresql
 SQLALCHEMY_DATABASE_URL = "postgresql://postgres@localhost/User"
+# Conexión a la base de datos llamada postgres
+#servidor localhost
+#Usuario: postgres
+#contraseña:
 
 # 1. El Engine es el motor que maneja la comunicación con la base de datos
 engine = create_engine(SQLALCHEMY_DATABASE_URL, pool_size=5, max_overflow=10)

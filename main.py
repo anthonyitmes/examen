@@ -6,7 +6,7 @@ from app.api import products  # Verifica que la ruta sea app.api.routes o app.ap
 from app.db.basedate import engine, Base
 
 # 2. Creación de tablas (Útil para desarrollo)
-# Nota: En producción se recomienda usar Alembic para migraciones
+# creación de tabla de productos
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
